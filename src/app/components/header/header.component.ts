@@ -1,14 +1,20 @@
-import {Component, input, signal, WritableSignal, InputSignal} from '@angular/core';
+import {Component,  signal, WritableSignal, Signal, inject} from '@angular/core';
+import {RouterLink, RouterLinkActive} from '@angular/router';
+import {CartService} from '../../services/cart.service';
 
 @Component({
-  imports: [],
+  imports: [
+    RouterLink,
+    RouterLinkActive
+  ],
   selector: 'app-header',
   styleUrl: './header.component.css',
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
 
-  public readonly cartCount: InputSignal<number> = input<number>(0);
+  private readonly cartService: CartService = inject(CartService);
+  protected readonly cartCount: Signal<number> = this.cartService.totalItems;
 
   protected readonly isDarkMode: WritableSignal<boolean> = signal<boolean>(false);
 

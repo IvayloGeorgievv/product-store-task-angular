@@ -5,9 +5,9 @@
   </div>
 
   <nav>
-    <a href="#" class="active">Home</a>
-    <a href="#">Products</a>
-    <a href="#">About</a>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/products" routerLinkActive="active">Products</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
   </nav>
 
   <div class="buttons-container">
@@ -19,7 +19,7 @@
       }
     </button>
 
-    <button type="button" class="icon-btn cart-btn" aria-label="Cart">
+    <button type="button" class="icon-btn cart-btn" routerLink="/cart" aria-label="Cart">
       <i class="fa-solid fa-cart-shopping"></i>
       <span class="cart-badge">{{ cartCount() }}</span>
     </button>

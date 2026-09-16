@@ -1,4 +1,4 @@
-export interface ProductModel {
+export interface Product {
   id: number;
   name: string;
   category: string;
@@ -8,5 +8,7 @@ export interface ProductModel {
   description: string;
   rating: number; // 1-5
   reviewCount: number;
-  createdAt: Date | string;
+  createdAt: Date;
+  specs: Record<string, string>;
+  relatedIds: number[];
 }

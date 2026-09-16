@@ -1,0 +1,54 @@
+<main>
+  <section class="about-hero">
+    <h1 class="page-title">About ProductStore</h1>
+    <p class="hero-lead">
+      We build high-performance, accessible, and elegant digital products powered by modern Angular architecture.
+    </p>
+  </section>
+
+  <section class="values-grid">
+    <div class="value-card">
+      <div class="icon-circle">
+        <i class="fa-solid fa-bolt"></i>
+      </div>
+      <h3>Lighting Fast</h3>
+      <p>Fine-grained reactivity with Angular Signals ensures optimal runtime efficiency and zero overhead.</p>
+    </div>
+
+    <div class="value-card">
+      <div class="icon-circle">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h3>Strict Standards</h3>
+      <p>Clean design tokens, semantic accessibility, and strict typing guarantee long-term stability.</p>
+    </div>
+
+    <div class="value-card">
+      <div class="icon-circle">
+        <i class="fa-solid fa-gem"></i>
+      </div>
+      <h3>Premium Quality</h3>
+      <p>Curated catalog items tested to meet the highest performance and aesthetic benchmarks.</p>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <h2 class="section-heading">Our Core Team</h2>
+    <div class="team-grid">
+      @for (member of teamMembers; track member.name) {
+        <div class="team-card">
+          <div class="avatar-box">
+            <i class="fa-solid {{ member.icon }}"></i>
+          </div>
+          <h4>{{ member.name }}</h4>
+          <span>{{ member.role }}</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Ready to explore our store?</h2>
+    <a routerLink="/products" class="btn-shop">Browse Products</a>
+  </section>
+</main>

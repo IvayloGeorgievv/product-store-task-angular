@@ -1,38 +1,27 @@
 <article [class.out-of-stock]="!product().inStock">
-  <!-- Sale badge on top right -->
   @if (product().salePrice) {
     <div class="discount-badge">
       -{{ discountPercent }}%
     </div>
   }
 
-  <!-- @switch for category with FontAwesome icons -->
-  <div class="product-placeholder">
-    @switch (product().category) {
-      @case ('Audio') {
-        <i class="fa-solid fa-headphones"></i>
-      }
-      @case ('Electronics') {
-        <i class="fa-solid fa-laptop"></i>
-      }
-      @case ('Home') {
-        <i class="fa-solid fa-couch"></i>
-      }
-      @case ('Accessories') {
-        <i class="fa-solid fa-plug"></i>
-      }
-      @default {
-        <i class="fa-solid fa-box-open"></i>
-      }
-    }
-  </div>
+  <!-- ЛИНК ВЪРХУ КАРТИНКАТА -->
+  <a [routerLink]="['/products', product().id]" class="product-img-link">
+    <div class="product-placeholder">
+      <i class="fa-solid {{ product().category | categoryIcon }}"></i>
+    </div>
+  </a>
 
   <div class="product-details">
-    <h2 class="product-name">{{ product().name }}</h2>
+    <!-- ЛИНК ВЪРХУ ЗАГЛАВИЕТО -->
+    <h2 class="product-name">
+      <a [routerLink]="['/products', product().id]" class="product-title-link">
+        {{ product().name }}
+      </a>
+    </h2>
     <span class="product-category">{{ product().category }}</span>
   </div>
 
-  <!-- Task 9: Star Rating component -->
   <div class="product-rating-row">
     <app-star-rating
       [rating]="product().rating"
@@ -41,12 +30,10 @@
     />
   </div>
 
-  <!-- Description, snipped to 60 symbols -->
   <p class="product-description">
     {{ product().description | truncate:60 }}
   </p>
 
-  <!-- Estimated time -->
   <span class="product-added-time">
     Added {{ product().createdAt | relativeTime }}
   </span>
@@ -68,7 +55,6 @@
     }
   </div>
 
-  <!-- Quantity selector and buttons based on availability -->
   <div class="card-actions">
     @if (product().inStock) {
       <div class="quantity-wrapper">
@@ -88,7 +74,7 @@
         class="btn-add-to-cart"
         (click)="onAddToCart()"
       >
-        Add to cart
+        {{ isInCart ? 'Added ✓' : 'Add to cart' }}
       </button>
     } @else {
       <button

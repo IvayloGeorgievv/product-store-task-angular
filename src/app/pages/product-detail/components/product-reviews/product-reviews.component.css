@@ -1,0 +1,31 @@
+.reviews-wrapper {
+  padding: 1.5rem 0;
+}
+
+.reviews-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2.5rem 1rem;
+  border: 0.0625rem dashed var(--border-color);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.reviews-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.reviews-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0;
+}
+
+.reviews-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

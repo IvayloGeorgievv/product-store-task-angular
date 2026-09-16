@@ -1,0 +1,12 @@
+<section class="specs-wrapper">
+  @if (specs().length > 0) {
+    <dl class="specs-grid">
+      @for (spec of specs(); track spec[0]) {
+        <dt class="spec-key">{{ spec[0] }}</dt>
+        <dd class="spec-value">{{ spec[1] }}</dd>
+      }
+    </dl>
+  } @else {
+    <p class="empty-message">No specifications available for this product.</p>
+  }
+</section>

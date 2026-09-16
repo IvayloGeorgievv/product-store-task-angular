@@ -1,0 +1,118 @@
+<main>
+  <h1 class="page-title">Shopping Cart</h1>
+
+  @if (cartService.cartItems().length > 0) {
+    <div class="cart-layout">
+      <!-- Items Table / List -->
+      <section class="cart-items-section">
+        <div class="cart-header-row">
+          <span class="col-product">Product</span>
+          <span class="col-price">Price</span>
+          <span class="col-qty">Quantity</span>
+          <span class="col-total">Total</span>
+          <span class="col-action"></span>
+        </div>
+
+        <div class="items-list">
+          @for (item of cartService.cartItems(); track item.product.id) {
+            <div class="cart-row">
+              <div class="col-product product-info">
+                <a [routerLink]="['/products', item.product.id]" class="product-title-link">
+                  {{ item.product.name }}
+                </a>
+                <span class="product-category">{{ item.product.category }}</span>
+              </div>
+
+              <div class="col-price">
+                ${{ item.product.salePrice ?? item.product.price }}
+              </div>
+
+              <div class="col-qty">
+                <div class="qty-control">
+                  <button
+                    type="button"
+                    class="qty-btn"
+                    (click)="updateQuantity(item.product.id, item.quantity - 1)"
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <span class="qty-val">{{ item.quantity }}</span>
+                  <button
+                    type="button"
+                    class="qty-btn"
+                    [disabled]="item.quantity >= 10"
+                    (click)="updateQuantity(item.product.id, item.quantity + 1)"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-total font-bold">
+                ${{ getLineTotal(item) }}
+              </div>
+
+              <div class="col-action">
+                <button
+                  type="button"
+                  class="btn-remove"
+                  (click)="removeItem(item.product.id)"
+                  aria-label="Remove item"
+                >
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="cart-table-footer">
+          <a routerLink="/products" class="continue-link">
+            <i class="fa-solid fa-arrow-left"></i> Continue shopping
+          </a>
+          <button type="button" class="btn-clear" (click)="clearCart()">
+            Clear cart
+          </button>
+        </div>
+      </section>
+
+      <!-- Order Summary Card -->
+      <aside class="cart-summary-card">
+        <h2 class="summary-title">Order Summary</h2>
+
+        <div class="summary-row">
+          <span>Items count</span>
+          <span>{{ cartService.totalItems() }}</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Standard Shipping</span>
+          <span class="free-text">FREE</span>
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <div class="summary-row total-row">
+          <span>Total Price</span>
+          <span class="total-amount">${{ cartService.totalPrice() }}</span>
+        </div>
+
+        <button type="button" routerLink="/checkout" class="btn-checkout">
+          Proceed to Checkout
+        </button>
+      </aside>
+    </div>
+  } @else {
+    <!-- Empty Cart Fallback -->
+    <div class="empty-state">
+      <i class="fa-solid fa-cart-arrow-down empty-icon"></i>
+      <h2>Your cart is empty</h2>
+      <p>Looks like you haven't added anything to your cart yet.</p>
+      <a routerLink="/products" class="btn-browse">
+        Browse products
+      </a>
+    </div>
+  }
+</main>

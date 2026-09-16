@@ -1,0 +1,44 @@
+<app-hero-banner
+  announcement="NEW COLLECTION 2026"
+  (ctaClicked)="onHeroCtaClick($event)"
+/>
+
+<main>
+  <!-- Shop by Category -->
+  <section class="section-container">
+    <h2 class="section-title">Shop by category</h2>
+    <div class="category-grid">
+      @for (category of categoryCards; track category.name) {
+        <a class="category-card"
+          [routerLink]="['/products']"
+          [queryParams]="{ category: category.name }"
+        >
+          <div class="category-icon-wrapper">
+            <i class="fa-solid {{ category.name | categoryIcon }}"></i>
+          </div>
+          <h3 class="category-name">{{ category.name }}</h3>
+          <span class="category-count">{{ category.count }} items</span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section-container">
+    <div class="section-header">
+      <h2 class="section-title">Featured products</h2>
+      <a routerLink="/products" class="view-all-link">
+        View all products <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="featured-grid">
+      @for (product of featuredProducts; track product.id) {
+        <app-product-card
+          [product]="product"
+          (addedToCart)="handleAddToCart($event)"
+        />
+      }
+    </div>
+  </section>
+</main>

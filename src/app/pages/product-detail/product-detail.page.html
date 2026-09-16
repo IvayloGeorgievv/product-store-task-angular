@@ -1,0 +1,148 @@
+<main>
+  <app-breadcrumb />
+
+  @if (product(); as current) {
+    <article class="detail-grid">
+      <!-- Gallery -->
+      <section class="gallery-col">
+        <div class="main-image-placeholder">
+          <i class="fa-solid {{ current.category | categoryIcon }}"></i>
+        </div>
+
+        <div class="thumbnails-row">
+          @for (thumb of [0, 1, 2]; track thumb) {
+            <button
+              type="button"
+              class="thumb-box"
+              [class.active]="selectedThumbnail() === thumb"
+              (click)="setThumbnail(thumb)"
+              aria-label="View thumbnail"
+            >
+              <i class="fa-regular fa-image"></i>
+            </button>
+          }
+        </div>
+      </section>
+
+      <!-- Info -->
+      <section class="info-col">
+        <span class="category-badge">{{ current.category }}</span>
+        <h1 class="product-title">{{ current.name }}</h1>
+
+        <div class="rating-row">
+          <app-star-rating
+            [rating]="current.rating"
+            [reviewCount]="current.reviewCount"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="price-row">
+          @if (current.salePrice) {
+            <s class="old-price">${{ current.price }}</s>
+            <span class="current-price">${{ current.salePrice }}</span>
+          } @else {
+            <span class="current-price">${{ current.price }}</span>
+          }
+        </div>
+
+        <p class="description">{{ current.description }}</p>
+
+        <div class="status-row">
+          @if (current.inStock) {
+            <span class="badge in-stock">In stock</span>
+          } @else {
+            <span class="badge out-of-stock">Out of stock</span>
+          }
+          <span class="shipping-info"><i class="fa-solid fa-truck-fast"></i> Free standard shipping</span>
+        </div>
+
+        <!-- Quantity & Add to Cart -->
+        <div class="action-row">
+          @if (current.inStock) {
+            <div class="qty-control">
+              <button
+                type="button"
+                class="qty-btn"
+                (click)="decrementQuantity()"
+                [disabled]="quantity() <= 1"
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+              <span class="qty-val">{{ quantity() }}</span>
+              <button
+                type="button"
+                class="qty-btn"
+                (click)="incrementQuantity()"
+                [disabled]="quantity() >= 10"
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              type="button"
+              class="btn-add"
+              (click)="onAddToCart()"
+            >
+              @if (cartService.isInCart(current.id)) {
+                <i class="fa-solid fa-check"></i> Added ✓
+              } @else {
+                <i class="fa-solid fa-cart-shopping"></i> Add to cart
+              }
+            </button>
+          } @else {
+            <button type="button" class="btn-disabled" disabled>
+              Out of stock
+            </button>
+          }
+
+          <button type="button" class="btn-wishlist" aria-label="Add to wishlist">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+      </section>
+    </article>
+
+    <!-- Tabs -->
+    <section class="tabs-section">
+      <nav class="tabs-header">
+        <a routerLink="./specs" routerLinkActive="active" class="tab-link">Specifications</a>
+        <a routerLink="./reviews" routerLinkActive="active" class="tab-link">Reviews ({{ current.reviewCount }})</a>
+      </nav>
+
+      <div class="tab-content">
+        <router-outlet />
+      </div>
+    </section>
+
+    <!-- Related Products -->
+    @if (relatedProducts().length > 0) {
+      <section class="related-section">
+        <h2 class="related-title">Related products</h2>
+        <div class="related-grid">
+          @for (rel of relatedProducts(); track rel.id) {
+            <a [routerLink]="['/products', rel.id]" class="related-card">
+              <div class="related-thumb">
+                <i class="fa-solid fa-box-open"></i>
+              </div>
+              <div class="related-info">
+                <h4 class="related-name">{{ rel.name }}</h4>
+                <span class="related-price">${{ rel.salePrice ?? rel.price }}</span>
+              </div>
+            </a>
+          }
+        </div>
+      </section>
+    }
+  } @else {
+    <div class="not-found-box">
+      <i class="fa-solid fa-circle-exclamation error-icon"></i>
+      <h2>Product not found</h2>
+      <p>The product you are looking for does not exist or has been removed.</p>
+      <a routerLink="/products" class="btn-back">Back to products</a>
+    </div>
+  }
+</main>
