@@ -1,1 +1,73 @@
-/* You can add global styles to this file, and also import other style files */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Brand */
+  --primary-color: #DD0031;
+  --primary-hover: #b80028;
+  --text-on-primary: #ffffff;
+
+  /* Neutrals (Light Mode) */
+  --bg-color: #ffffff;
+  --text-color: #1e293b;
+  --text-muted: #64748b;
+  --text-heading: #0f172a;
+  --surface-color: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border-color: #e2e8f0;
+
+  /* Badges & Accents */
+  --badge-in-stock-bg: #dcfce7;
+  --badge-in-stock-text: #15803d;
+  --badge-out-stock-bg: #fee2e2;
+  --badge-out-stock-text: #b91c1c;
+  --star-filled: #f59e0b;
+  --star-empty: #cbd5e1;
+
+  /* Buttons */
+  --btn-dark-bg: #0f172a;
+  --btn-dark-hover: #1e293b;
+
+  /* Skeleton Gradient */
+  --skeleton-start: #e2e8f0;
+  --skeleton-mid: #f1f5f9;
+
+  /* Hero section */
+  --hero-bg-start: #1A2138;
+  --hero-bg-end: #2D2D5A;
+  --hero-text-muted: #cbd5e1;
+  --hero-btn-secondary-border: #ffffff;
+  --hero-btn-secondary-hover-bg: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode {
+  --bg-color: #1A2138;
+  --text-color: #E0E0E0;
+  --text-muted: #94a3b8;
+  --text-heading: #ffffff;
+  --surface-color: #212337;
+  --surface-alt: #1A2138;
+  --border-color: #3E4462;
+
+  --btn-dark-bg: #3E4462;
+  --btn-dark-hover: #4f567a;
+
+  --skeleton-start: #2e344d;
+  --skeleton-mid: #3e4462;
+  --star-empty: #475569;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

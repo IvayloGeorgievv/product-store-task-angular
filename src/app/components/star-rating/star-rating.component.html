@@ -1,0 +1,18 @@
+<div class="star-rating-container" [class.interactive]="!readonly()">
+  <div class="stars" (mouseleave)="onMouseLeave()">
+    @for (star of [1, 2, 3, 4, 5]; track star) {
+      <span
+        class="star"
+        [class.filled]="isStarFilled(star)"
+        (mouseenter)="onMouseEnter(star)"
+        (click)="onStarClick(star)"
+      >
+        <i class="fa-solid fa-star"></i>
+      </span>
+    }
+  </div>
+
+  <span class="rating-text">
+    {{ rating() }} ({{ reviewCount() }})
+  </span>
+</div>

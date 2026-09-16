@@ -1,0 +1,27 @@
+<header>
+  <div class="logo-container">
+    <div class="logo-badge">A</div>
+    <span class="brand-name">ProductStore</span>
+  </div>
+
+  <nav>
+    <a href="#" class="active">Home</a>
+    <a href="#">Products</a>
+    <a href="#">About</a>
+  </nav>
+
+  <div class="buttons-container">
+    <button type="button" class="icon-btn" (click)="toggleTheme()" aria-label="Toggle theme">
+      @if (isDarkMode()) {
+        <i class="fa-solid fa-moon"></i>
+      } @else {
+        <i class="fa-solid fa-sun"></i>
+      }
+    </button>
+
+    <button type="button" class="icon-btn cart-btn" aria-label="Cart">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="cart-badge">{{ cartCount() }}</span>
+    </button>
+  </div>
+</header>

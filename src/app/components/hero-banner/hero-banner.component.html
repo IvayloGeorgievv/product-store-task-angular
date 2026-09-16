@@ -1,0 +1,18 @@
+<section>
+  <div class="hero-announcement">
+    {{ announcement() }}
+  </div>
+  <div class="hero-headlines">
+    <h1>{{ headline }}</h1>
+    <p>{{ subHeadline }}</p>
+  </div>
+  <div class="hero-buttons">
+    <button type="button" class="btn-primary" (click)="onPrimaryClick()">
+      Shop Now
+    </button>
+
+    <button type="button" class="btn-secondary">
+      Learn More
+    </button>
+  </div>
+</section>
